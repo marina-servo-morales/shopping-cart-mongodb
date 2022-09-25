@@ -1,4 +1,7 @@
+from src.schemas.user import UserSchema
 
+
+# await serve para esperar a excução da função, só continua o processo quando receber o restultado da função (que será utilizado no resto do processo)
 async def create_user(users_collection, user):
     try:
         user = await users_collection.insert_one(user)

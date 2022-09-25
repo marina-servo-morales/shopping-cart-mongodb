@@ -17,6 +17,8 @@ async def users_crud():
     user =  {
         "email": "lu_domagalu@gmail.com",
         "password": "213sd312re3",
+        "name": "marina morales",
+        
         "is_active": True,
         "is_admin": False
     }
@@ -41,7 +43,7 @@ async def users_crud():
             users_collection,
             user["email"]
         )
-
+        # campos que quero atualizar:
         user_data = {
             "password": 'new_password1234'
         }
@@ -73,7 +75,7 @@ async def users_crud():
         users = await get_users(
             users_collection,
             skip=0,
-            limit=2
+            limit=5
         )
         print(users)
 

@@ -1,3 +1,4 @@
+from inspect import _Object
 from typing import List
 from pydantic import BaseModel, Field
 
@@ -16,3 +17,9 @@ class Address(BaseModel):
 class AddressSchema(BaseModel):
     user: UserSchema
     address: List[Address] = []
+
+
+
+
+# sugestão da Marcella Menezes no slack:
+# data = await address_collection.find_one({'user_id': _ObjectId(user)id})

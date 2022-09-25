@@ -1,5 +1,7 @@
+# módulo nativo
 from os import environ
 
+# módulo não nativo
 from motor.motor_asyncio import AsyncIOMotorClient
 
 
@@ -16,6 +18,8 @@ db = DataBase()
 
 async def connect_db():
     # conexao mongo, com no máximo 10 conexões async
+    # função de conexao mongo, com no máximo 10 conexões async (se não, fica infinito - maxPoolSize e minPoolSize)
+        # tls=True, tlsAllowInvalidCertificates=True -> são pra configurar o Atlas, é obrigatório
     db.client = AsyncIOMotorClient(
         db.database_uri,
         maxPoolSize=10,
