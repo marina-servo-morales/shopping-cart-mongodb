@@ -1,6 +1,7 @@
 from src.models.user import (
     create_user,
     get_user_by_email,
+    get_user_by_id,
     update_user,
     delete_user,
     get_users
@@ -9,15 +10,15 @@ from src.server.database import connect_db, db, disconnect_db
 
 
 async def users_crud():
-    option = input("Entre com a opção de CRUD: ")
+    option = input("Entre com a opção de CRUD: \n1: Criar usuário\n2: Procurar usuário por e-mail\n3: Atualizar usuário selecionado por e-mail\n4: Deletar usuário selecionado por e-mail\n5: Deletar usuário selecionado pelo ID\n6: Listar usuários\n")
     
     await connect_db()
     users_collection = db.users_collection
 
     user =  {
-        "email": "lu_domagalu@gmail.com",
+        "email": "teste321@gmail.com",
         "password": "213sd312re3",
-        "name": "marina morales",
+        "name": "marina servo",
         
         "is_active": True,
         "is_admin": False
@@ -58,7 +59,7 @@ async def users_crud():
         else:
             print("Atualização falhou!")
     elif option == '4':
-        # delete
+        # delete por email
         user = await get_user_by_email(
             users_collection,
             user["email"]
@@ -71,11 +72,24 @@ async def users_crud():
 
         print(result)
     elif option == '5':
+        # delete por ID
+        user = await get_user_by_id(
+            users_collection,
+            user["_id"]
+        )
+
+        result = await delete_user(
+            users_collection,
+            user["_id"]
+        )
+
+        print(result)
+    elif option == '6':
         # pagination
         users = await get_users(
             users_collection,
             skip=0,
-            limit=5
+            limit=0
         )
         print(users)
 

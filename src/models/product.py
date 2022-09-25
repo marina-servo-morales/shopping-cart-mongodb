@@ -37,6 +37,13 @@ async def get_product_by_email(product_collection, email):
     product = await product_collection.find_one({'email': email})
     return product
 
+
+async def get_product_by_id(product_collection, product_id):
+    product = await product_collection.find_one({'_id': product_id})
+    return product
+
+
+
 async def update_product(product_collection, product_id, product_data):
     try:
         data = {k: v for k, v in product_data.items() if v is not None}

@@ -31,7 +31,15 @@ async def get_users(users_collection, skip, limit):
         print(f'get_users.error: {e}')
 
 async def get_user_by_email(users_collection, email):
-    user = await users_collection.find_one({'email': email})
+    try:
+        user = await users_collection.find_one({'email': email})
+        return user
+
+    except Exception as e:
+        print(f'get_users.error: {e}')
+
+async def get_user_by_id(users_collection, id_user):
+    user = await users_collection.find_one({'_id': id_user})
     return user
 
 async def update_user(users_collection, user_id, user_data):
